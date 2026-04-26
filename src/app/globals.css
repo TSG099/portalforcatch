@@ -1,0 +1,81 @@
+@import "tailwindcss";
+
+:root {
+  --background: #fff7e3;
+  --foreground: #3f3a36;
+  --catch-cream: #fff7e3;
+  --catch-ink: #3f3a36;
+  --catch-teal-400: #5dbaab;
+  --catch-teal-500: #4aa89a;
+  --catch-teal-600: #3d9488;
+  --catch-coral: #ff6b4a;
+  --catch-coral-hover: #ff5738;
+  --catch-coral-border: #e85a3d;
+  --catch-shell: #eef0f4;
+  --catch-panel: #f5f6f8;
+  --catch-line: rgba(63, 58, 54, 0.08);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-feature-settings: "rlig" 1, "calt" 1;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--catch-teal-500) 22%, transparent);
+}
+
+/* Primary actions: override UA / color-scheme so submit buttons stay visible on white panels */
+button[data-catch-primary="true"] {
+  background-color: var(--catch-coral) !important;
+  color: #ffffff !important;
+  border: 1px solid var(--catch-coral-border) !important;
+  border-radius: 9999px;
+  transition: background-color 0.15s ease, opacity 0.15s ease;
+}
+button[data-catch-primary="true"]:hover:not(:disabled) {
+  background-color: var(--catch-coral-hover) !important;
+}
+button[data-catch-primary="true"]:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+/* Shared form control focus — teal ring, minimal */
+input.catch-field,
+textarea.catch-field,
+select.catch-field {
+  border-radius: 0.75rem;
+  border: 1px solid rgb(212 212 216);
+  background: #fff;
+  color: #18181b;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+input.catch-field::placeholder,
+textarea.catch-field::placeholder {
+  color: rgb(161 161 170);
+}
+input.catch-field:focus,
+textarea.catch-field:focus,
+select.catch-field:focus {
+  outline: none;
+  border-color: var(--catch-teal-500);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--catch-teal-500) 22%, transparent);
+}
